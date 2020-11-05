@@ -1,10 +1,8 @@
-//---------------------------------------------------
-// Purpose: Implement simple spreadsheet program.
-// Author:  John Gauch and TBA
-//---------------------------------------------------
-
+#include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
+#include <string>
 #include <iostream>
 using namespace std;
 
@@ -45,11 +43,141 @@ void print(float data[ROWS][COLS], int r1, int c1, int r2, int c2)
         cout << endl;
     }
 }
-//---------------------------------------------------
-// Main program
-//---------------------------------------------------
+
+void getUserInput(string &userInput) {
+
+    cout << "Enter command" << endl;
+    cout << ">> ";
+    getline(cin, userInput);
+    cout << userInput << endl;
+
+    transform(userInput.begin(), userInput.end(), userInput.begin(), ::toupper);
+
+    cout << userInput << endl;
+
+}
+
+void parseUserInput(string &userInput, string commandParameters[]) {
+
+    char* charArray;
+    string str_obj(userInput);
+    charArray = &str_obj[0];
+
+    char* parameters = strtok(charArray, " ");
+
+    int i = 0;
+    while (parameters != nullptr) {
+
+        commandParameters[i] = parameters;
+
+        cout << parameters << endl;
+        parameters = strtok(nullptr, " ");
+
+        i++;
+
+    }
+
+}
+
+void validateUserCommand() {
+
+    bool isValidCommand = false;
+//
+//    for (int i = 0; i < 10; i++) {
+//
+//        //Debugging purposes
+//        cout << i << ": " << validCommands[i] << endl;
+//
+//        if (userInput == validCommands[i]) {
+//
+//            commandIndex = i;
+//
+//            //Debugging purposes
+//            cout << "Valid Command " << commandIndex << endl;
+//
+//            switch (commandIndex) {
+//
+//                case 0:
+//                    //STORE command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 1:
+//                    //RANDOMIZE command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 2:
+//                    //MIN command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 3:
+//                    //MAX command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 4:
+//                    //SUM command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 5:
+//                    //AVE command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 6:
+//                    //VAR command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 7:
+//                    //STD command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 8:
+//                    //PRINT command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                case 9:
+//                    //QUIT command
+//
+//                    isValidCommand = true;
+//
+//                    break;
+//                default:
+//                    break;
+//
+//            }
+//
+//        }
+
+//    if (!isValidCommand) {
+//
+//        getUserInput(userInput, validCommands);
+//
+//    }
+
+}
+
 int main()
 {
+    string validCommands[10] = {"STORE", "RANDOMIZE", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT"};
+    string userInput;
+    string commandParameters[] = {};
+
     // Initialize spreadsheet
     float data[ROWS][COLS];
     for (int row = 0; row < ROWS; row++)
@@ -61,6 +189,12 @@ int main()
     print(data, 0, 0, 5, 5);
 
     // ADD CODE TO HANDLE COMMANDS HERE
+    getUserInput(userInput);
+    parseUserInput(userInput, commandParameters);
+
+    for (int i = 0; i < commandParameters->size() - 1; i++) {
+        cout << commandParameters[i] << endl;
+    }
 
     return 0;
 }

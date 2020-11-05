@@ -49,29 +49,24 @@ void getUserInput(string &userInput) {
     cout << "Enter command" << endl;
     cout << ">> ";
     getline(cin, userInput);
-    cout << userInput << endl;
 
     transform(userInput.begin(), userInput.end(), userInput.begin(), ::toupper);
-
-    cout << userInput << endl;
 
 }
 
 void parseUserInput(string &userInput, string commandParameters[]) {
 
     char* charArray;
-    string str_obj(userInput);
-    charArray = &str_obj[0];
+    charArray = &userInput[0];
 
     char* parameters = strtok(charArray, " ");
 
     int i = 0;
-    while (parameters != nullptr) {
+    while (parameters != NULL) {
 
         commandParameters[i] = parameters;
 
-        cout << parameters << endl;
-        parameters = strtok(nullptr, " ");
+        parameters = strtok(NULL, " ");
 
         i++;
 

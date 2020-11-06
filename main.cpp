@@ -74,101 +74,114 @@ void parseUserInput(string &userInput, string commandParameters[]) {
 
 }
 
-void validateUserCommand() {
+void validateUserCommand(string commandParameters[], string validCommands[], string &userInput) {
 
     bool isValidCommand = false;
-//
-//    for (int i = 0; i < 10; i++) {
-//
-//        //Debugging purposes
-//        cout << i << ": " << validCommands[i] << endl;
-//
-//        if (userInput == validCommands[i]) {
-//
-//            commandIndex = i;
-//
-//            //Debugging purposes
-//            cout << "Valid Command " << commandIndex << endl;
-//
-//            switch (commandIndex) {
-//
-//                case 0:
-//                    //STORE command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 1:
-//                    //RANDOMIZE command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 2:
-//                    //MIN command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 3:
-//                    //MAX command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 4:
-//                    //SUM command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 5:
-//                    //AVE command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 6:
-//                    //VAR command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 7:
-//                    //STD command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 8:
-//                    //PRINT command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                case 9:
-//                    //QUIT command
-//
-//                    isValidCommand = true;
-//
-//                    break;
-//                default:
-//                    break;
-//
-//            }
-//
-//        }
+    int commandIndex = 0;
 
-//    if (!isValidCommand) {
-//
-//        getUserInput(userInput, validCommands);
-//
-//    }
+    for (int i = 0; i < 10; i++) {
+
+        //Debugging purposes
+        cout << i << ": " << validCommands[i] << endl;
+
+        if (commandParameters[0] == validCommands[i]) {
+
+            commandIndex = i;
+
+            //Debugging purposes
+            cout << "Valid Command " << commandIndex << endl;
+
+            switch (commandIndex) {
+
+                case 0:
+                    //STORE command
+                    //store();
+
+                    isValidCommand = true;
+
+                    break;
+                case 1:
+                    //RANDOMIZE command
+                    //randomize();
+
+                    isValidCommand = true;
+
+                    break;
+                case 2:
+                    //MIN command
+                    //min();
+
+                    isValidCommand = true;
+
+                    break;
+                case 3:
+                    //MAX command
+                    //max();
+
+                    isValidCommand = true;
+
+                    break;
+                case 4:
+                    //SUM command
+                    //sum();
+
+                    isValidCommand = true;
+
+                    break;
+                case 5:
+                    //AVE command
+                    //average();
+
+                    isValidCommand = true;
+
+                    break;
+                case 6:
+                    //VAR command
+                    //variance();
+
+                    isValidCommand = true;
+
+                    break;
+                case 7:
+                    //STD command
+                    //standardDeviation();
+
+                    isValidCommand = true;
+
+                    break;
+                case 8:
+                    //PRINT command
+                    //print();
+
+                    isValidCommand = true;
+
+                    break;
+                case 9:
+                    //QUIT command
+                    //quit();
+
+                    isValidCommand = true;
+
+                    break;
+                default:
+                    break;
+
+            }
+
+        }
+
+        if (!isValidCommand) {
+
+            getUserInput(userInput);
+            i = 0;
+
+        }
+
+    }
 
 }
 
-int main()
-{
+int main() {
     string validCommands[10] = {"STORE", "RANDOMIZE", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT"};
     string userInput;
     string commandParameters[] = {};
@@ -190,6 +203,8 @@ int main()
     for (int i = 0; i < commandParameters->size() - 1; i++) {
         cout << commandParameters[i] << endl;
     }
+
+    validateUserCommand(commandParameters, validCommands, userInput);
 
     return 0;
 }

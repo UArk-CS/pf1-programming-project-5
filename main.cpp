@@ -79,7 +79,7 @@ void validateUserCommand(string commandParameters[], string validCommands[], str
     bool isValidCommand = false;
     int commandIndex = 0;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < validCommands->size() - 1; i++) {
 
         //Debugging purposes
         cout << i << ": " << validCommands[i] << endl;
@@ -170,14 +170,16 @@ void validateUserCommand(string commandParameters[], string validCommands[], str
 
         }
 
-        if (!isValidCommand) {
-
-            getUserInput(userInput);
-            i = 0;
-
-        }
+//        if (!isValidCommand && i < 10) {
+//
+//            getUserInput(userInput);
+//            i = 0;
+//
+//        }
 
     }
+
+
 
 }
 

@@ -10,10 +10,6 @@ using namespace std;
 const int ROWS = 26;
 const int COLS = 26;
 
-//---------------------------------------------------
-// Read read index of the form A4 and calculate
-// the corresponding row=3 col=0 values.
-//---------------------------------------------------
 void read_index(int &row, int &col)
 {
     char letter = ' ';
@@ -31,9 +27,6 @@ void read_index(int &row, int &col)
         cout << "Error: invalid row\n";
 }
 
-//---------------------------------------------------
-// Print range of values in spreadsheet array
-//---------------------------------------------------
 void print(float data[ROWS][COLS], int r1, int c1, int r2, int c2)
 {
     for (int row = r1; row <= r2; row++)
@@ -79,114 +72,110 @@ void validateUserCommand(string commandParameters[], string validCommands[], str
     bool isValidCommand = false;
     int commandIndex = 0;
 
-    for (int i = 0; i < validCommands->size() - 1; i++) {
+    while (!isValidCommand) {
 
-        //Debugging purposes
-        cout << i << ": " << validCommands[i] << endl;
+        for (int i = 0; i < 10; i++) {
 
-        if (commandParameters[0] == validCommands[i]) {
+            if (commandParameters[0] == validCommands[i]) {
 
-            commandIndex = i;
+                commandIndex = i;
 
-            //Debugging purposes
-            cout << "Valid Command " << commandIndex << endl;
+                switch (commandIndex) {
 
-            switch (commandIndex) {
+                    case 0:
+                        //STORE command
+//                        store();
 
-                case 0:
-                    //STORE command
-                    //store();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 1:
+                        //RANDOMIZE command
+                        //randomize();
 
-                    break;
-                case 1:
-                    //RANDOMIZE command
-                    //randomize();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 2:
+                        //MIN command
+                        //min();
 
-                    break;
-                case 2:
-                    //MIN command
-                    //min();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 3:
+                        //MAX command
+                        //max();
 
-                    break;
-                case 3:
-                    //MAX command
-                    //max();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 4:
+                        //SUM command
+                        //sum();
 
-                    break;
-                case 4:
-                    //SUM command
-                    //sum();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 5:
+                        //AVE command
+                        //average();
 
-                    break;
-                case 5:
-                    //AVE command
-                    //average();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 6:
+                        //VAR command
+                        //variance();
 
-                    break;
-                case 6:
-                    //VAR command
-                    //variance();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 7:
+                        //STD command
+                        //standardDeviation();
 
-                    break;
-                case 7:
-                    //STD command
-                    //standardDeviation();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 8:
+                        //PRINT command
+                        //print();
 
-                    break;
-                case 8:
-                    //PRINT command
-                    //print();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    case 9:
+                        //QUIT command
+                        //quit();
 
-                    break;
-                case 9:
-                    //QUIT command
-                    //quit();
+                        isValidCommand = true;
 
-                    isValidCommand = true;
+                        break;
+                    default:
+                        break;
 
-                    break;
-                default:
-                    break;
+                }
 
             }
 
         }
 
-//        if (!isValidCommand && i < 10) {
-//
-//            getUserInput(userInput);
-//            i = 0;
-//
-//        }
+        if (!isValidCommand) {
+
+            getUserInput(userInput);
+            parseUserInput(userInput, commandParameters);
+
+        }
 
     }
-
-
 
 }
 
 int main() {
     string validCommands[10] = {"STORE", "RANDOMIZE", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT"};
     string userInput;
-    string commandParameters[] = {};
+    string commandParameters[4] = {};
 
     // Initialize spreadsheet
     float data[ROWS][COLS];
@@ -202,7 +191,8 @@ int main() {
     getUserInput(userInput);
     parseUserInput(userInput, commandParameters);
 
-    for (int i = 0; i < commandParameters->size() - 1; i++) {
+    int size = sizeof(commandParameters) / sizeof(commandParameters[0]);
+    for (int i = 0; i < size; i++) {
         cout << commandParameters[i] << endl;
     }
 

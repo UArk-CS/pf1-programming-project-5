@@ -94,7 +94,7 @@ void sum(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3,
 
 }
 
-void average(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+float average(float data[ROWS][COLS], int row, int col, int row2, int col2) {
 
     float numberOfRows = row2 - row + 1;
     float sum;
@@ -105,19 +105,39 @@ void average(float data[ROWS][COLS], int row, int col, int row2, int col2, int r
 
     }
 
-    store(data, row3, col3, sum/numberOfRows);
+    return sum/numberOfRows;
 
 }
 
-void variance(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+float variance(float data[ROWS][COLS], int row, int col, int row2, int col2) {
+
+    float numberOfRows = row2 - row + 1;
+    float var = 0.0;
+    float avg = 0.0;
+
+    avg = average(data, row, col, row2, col2);
+
+    for (int i = 0; i < numberOfRows; i++) {
+
+        var += pow(data[row + i][col] - avg, 2);
+
+    }
 
 
+    return var / numberOfRows;
 
 }
 
-void standardDeviation(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+float standardDeviation(float data[ROWS][COLS], int row, int col, int row2, int col2) {
+
+    float std = 0.0;
+    float avg = 0.0;
+
+    std = sqrt(variance(data, row, col, row2, col2));
 
 
+
+    return std;
 
 }
 
@@ -202,7 +222,7 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
-                    average(data, row, col, row2, col2, row3, col3);
+                    store(data, row3, col3, average(data, row, col, row2, col2));
 
                     break;
                 case 6:
@@ -210,7 +230,8 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
-                    variance(data, row, col, row2, col2, row3, col3);
+
+                    store(data, row3, col3, variance(data, row, col, row2, col2));
 
                     break;
                 case 7:
@@ -218,7 +239,8 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
-                    standardDeviation(data, row, col, row2, col2, row3, col3);
+                    store(data, row3, col3, standardDeviation(data, row, col, row2, col2));
+
 
                     break;
                 case 8:

@@ -45,24 +45,24 @@ void randomize(float data[ROWS][COLS], int row1, int col1, int row2, int col2, i
 
 }
 
-void min(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+void minValue(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
 
-    int minValue = data[row][col];
+    float minValue = data[row][col];
     int numberOfRows = row2 - row;
 
     for (int i = 0; i < numberOfRows; i++) {
 
         numberOfRows += 1;
 
-        min(minValue, data[row + i][col]);
+        float valueToCompare = data[row + 1][col];
 
-        min(1, 2);
+        minValue = min(minValue, valueToCompare);
 
     }
 
 }
 
-void max(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+void maxValue(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
 
 
 
@@ -151,6 +151,7 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
+                    minValue(data, row, col, row2, col2, row3, col3);
 
                     break;
                 case 3:
@@ -164,26 +165,41 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                 case 4:
                     //SUM command
                     //sum();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    read_index(row3, col3);
 
                     break;
                 case 5:
                     //AVE command
                     //average();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    read_index(row3, col3);
 
                     break;
                 case 6:
                     //VAR command
                     //variance();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    read_index(row3, col3);
 
                     break;
                 case 7:
                     //STD command
                     //standardDeviation();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    read_index(row3, col3);
 
                     break;
                 case 8:
                     //PRINT command
                     //print();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    print(data, row, col, row2, col2);
 
                     break;
                 case 9:

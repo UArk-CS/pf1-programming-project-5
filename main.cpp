@@ -35,13 +35,60 @@ void store(float data[ROWS][COLS], int row, int col, float value) {
 
 void randomize(float data[ROWS][COLS], int row1, int col1, int row2, int col2, int value1, int value2) {
 
-    while (row1 != row2) {
+    while (row1 != row2+1) {
 
         int randomNumber = (rand() % value2) + value1;
         store(data, row1, col1, randomNumber);
         row1++;
 
     }
+
+}
+
+void min(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+
+    int minValue = data[row][col];
+    int numberOfRows = row2 - row;
+
+    for (int i = 0; i < numberOfRows; i++) {
+
+        numberOfRows += 1;
+
+        min(minValue, data[row + i][col]);
+
+        min(1, 2);
+
+    }
+
+}
+
+void max(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+
+
+
+}
+
+void sum(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+
+
+
+}
+
+void average(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+
+
+
+}
+
+void variance(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+
+
+
+}
+
+void standardDeviation(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
+
+
 
 }
 
@@ -68,7 +115,7 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
 
     bool isValidCommand = false;
     int commandIndex = 0;
-    int row=0, col=0, row2=0, col2 = 0;
+    int row=0, col=0, row2=0, col2 = 0, row3 = 0, col3 = 0;
     float valueFL=0;
     int valueInt1=0, valueInt2=0;
 
@@ -101,11 +148,17 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                 case 2:
                     //MIN command
                     //min();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    read_index(row3, col3);
 
                     break;
                 case 3:
                     //MAX command
                     //max();
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    read_index(row3, col3);
 
                     break;
                 case 4:

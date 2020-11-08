@@ -48,17 +48,17 @@ void randomize(float data[ROWS][COLS], int row1, int col1, int row2, int col2, i
 void minValue(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
 
     float minValue = data[row][col];
-    int numberOfRows = row2 - row;
+    int numberOfRows = row2 - row + 1;
 
     for (int i = 0; i < numberOfRows; i++) {
 
-        numberOfRows += 1;
-
-        float valueToCompare = data[row + 1][col];
+        float valueToCompare = data[row + i][col];
 
         minValue = min(minValue, valueToCompare);
 
     }
+
+    store(data, row3, col3, minValue);
 
 }
 
@@ -70,7 +70,16 @@ void maxValue(float data[ROWS][COLS], int row, int col, int row2, int col2, int 
 
 void sum(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
 
+    int numberOfRows = row2 - row + 1;
+    float sum;
 
+    for (int i = 0; i < numberOfRows; i++) {
+
+        sum += data[row + i][col];
+
+    }
+
+    store(data, row3, col3, sum);
 
 }
 
@@ -119,7 +128,7 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
     float valueFL=0;
     int valueInt1=0, valueInt2=0;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 11; i++) {
 
         if (userCommandInput == validCommands[i]) {
 
@@ -168,6 +177,7 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
+                    sum(data, row, col, row2, col2, row3, col3);
 
                     break;
                 case 5:
@@ -207,6 +217,11 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     keepGoing = false;
 
                     break;
+                case 10:
+                    //PRINTALL command
+                    print(data, 0, 0, 5, 5);
+
+                    break;
                 default:
                     break;
 
@@ -221,7 +236,8 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
 int main() {
 
     bool keepGoing = true;
-    string validCommands[10] = {"STORE", "RANDOM", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT"};
+    string validCommands[11] = {"STORE", "RANDOM", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT", "PRINTALL"};
+
     string usersCommandInput;
 
     // Initialize spreadsheet

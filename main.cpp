@@ -64,7 +64,18 @@ void minValue(float data[ROWS][COLS], int row, int col, int row2, int col2, int 
 
 void maxValue(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
 
+    float maxValue = data[row][col];
+    int numberOfRows = row2 - row + 1;
 
+    for (int i = 0; i < numberOfRows; i++) {
+
+        float valueToCompare = data[row + i][col];
+
+        maxValue = max(maxValue, valueToCompare);
+
+    }
+
+    store(data, row3, col3, maxValue);
 
 }
 
@@ -85,7 +96,16 @@ void sum(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3,
 
 void average(float data[ROWS][COLS], int row, int col, int row2, int col2, int row3, int col3) {
 
+    float numberOfRows = row2 - row + 1;
+    float sum;
 
+    for (int i = 0; i < numberOfRows; i++) {
+
+        sum += data[row + i][col];
+
+    }
+
+    store(data, row3, col3, sum/numberOfRows);
 
 }
 
@@ -145,7 +165,6 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     break;
                 case 1:
                     //RANDOMIZE command
-                    //randomize();
                     valueInt1 = 0;
                     valueInt2 = 0;
                     cin >> valueInt1 >> valueInt2;
@@ -156,7 +175,6 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     break;
                 case 2:
                     //MIN command
-                    //min();
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
@@ -165,15 +183,14 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     break;
                 case 3:
                     //MAX command
-                    //max();
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
+                    maxValue(data, row, col, row2, col2, row3, col3);
 
                     break;
                 case 4:
                     //SUM command
-                    //sum();
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
@@ -182,31 +199,30 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
                     break;
                 case 5:
                     //AVE command
-                    //average();
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
+                    average(data, row, col, row2, col2, row3, col3);
 
                     break;
                 case 6:
                     //VAR command
-                    //variance();
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
+                    variance(data, row, col, row2, col2, row3, col3);
 
                     break;
                 case 7:
                     //STD command
-                    //standardDeviation();
                     read_index(row, col);
                     read_index(row2, col2);
                     read_index(row3, col3);
+                    standardDeviation(data, row, col, row2, col2, row3, col3);
 
                     break;
                 case 8:
                     //PRINT command
-                    //print();
                     read_index(row, col);
                     read_index(row2, col2);
                     print(data, row, col, row2, col2);

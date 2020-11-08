@@ -33,6 +33,18 @@ void store(float data[ROWS][COLS], int row, int col, float value) {
 
 }
 
+void randomize(float data[ROWS][COLS], int row1, int col1, int row2, int col2, int value1, int value2) {
+
+    while (row1 != row2) {
+
+        int randomNumber = (rand() % value2) + value1;
+        store(data, row1, col1, randomNumber);
+        row1++;
+
+    }
+
+}
+
 void print(float data[ROWS][COLS], int r1, int c1, int r2, int c2)
 {
     for (int row = r1; row <= r2; row++)
@@ -56,8 +68,9 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
 
     bool isValidCommand = false;
     int commandIndex = 0;
-    int row, col = 0;
-    float value = 0;
+    int row=0, col=0, row2=0, col2 = 0;
+    float valueFL=0;
+    int valueInt1=0, valueInt2=0;
 
     for (int i = 0; i < 10; i++) {
 
@@ -68,14 +81,21 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
             switch (commandIndex) {
 
                 case 0:
-                    cin >> value;
+                    valueFL = 0.0;
+                    cin >> valueFL;
                     read_index(row, col);
-                    store(data, row, col, value);
+                    store(data, row, col, valueFL);
 
                     break;
                 case 1:
                     //RANDOMIZE command
                     //randomize();
+                    valueInt1 = 0;
+                    valueInt2 = 0;
+                    cin >> valueInt1 >> valueInt2;
+                    read_index(row, col);
+                    read_index(row2, col2);
+                    randomize(data, row, col, row2, col2, valueInt1, valueInt2);
 
                     break;
                 case 2:
@@ -132,7 +152,7 @@ void validateUserCommand(string &userCommandInput, string validCommands[], float
 int main() {
 
     bool keepGoing = true;
-    string validCommands[10] = {"STORE", "RANDOMIZE", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT"};
+    string validCommands[10] = {"STORE", "RANDOM", "MIN", "MAX", "SUM", "AVE", "VAR", "STD", "PRINT", "QUIT"};
     string usersCommandInput;
 
     // Initialize spreadsheet
